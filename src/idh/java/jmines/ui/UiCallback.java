@@ -1,6 +1,6 @@
-package de.uk.java.minesweeper.ui;
+package idh.java.jmines.ui;
 
-import de.uk.java.minesweeper.GameState;
+import idh.java.jmines.model.GameState;
 
 /**
  * This interface represents a (generic) UI callback

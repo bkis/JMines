@@ -1,4 +1,4 @@
-package de.uk.java.minesweeper;
+package idh.java.jmines.model;
 
 /**
  * This class represents a cell (or field)

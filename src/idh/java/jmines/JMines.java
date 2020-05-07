@@ -1,13 +1,15 @@
-package de.uk.java.minesweeper;
+package idh.java.jmines;
 
-import de.uk.java.minesweeper.ui.MineSweeperCli;
-import de.uk.java.minesweeper.ui.MineSweeperGui;
-import de.uk.java.minesweeper.ui.MineSweeperUi;
-import de.uk.java.minesweeper.ui.UiCallback;
+import idh.java.jmines.model.Cell;
+import idh.java.jmines.model.GameState;
+import idh.java.jmines.ui.JMinesUi;
+import idh.java.jmines.ui.UiCallback;
+import idh.java.jmines.ui.cli.JMinesCli;
+import idh.java.jmines.ui.gui.JMinesGui;
 
-public class MineSweeper {
+public class JMines {
 	
-	private MineSweeperUi ui; //a reference to the user interface
+	private JMinesUi ui; //a reference to the user interface
 	private GameState state; //a reference to the current game state
 	
 	
@@ -16,18 +18,18 @@ public class MineSweeper {
 	 */
 	public static void main(String[] args) {
 		//create an instance of the game (constructor initializes the game)
-		new MineSweeper(args.length == 0 || !args[0].equalsIgnoreCase("cli"));
+		new JMines(args.length == 0 || !args[0].equalsIgnoreCase("cli"));
 	}
 	
 	/**
 	 * This constructor initializes the MineSweeper game
 	 */
-	public MineSweeper(boolean gui) {
+	public JMines(boolean gui) {
 		//initialize the user interface (GUI or CLI!)
 		if (gui)
-			ui = new MineSweeperGui(); //use GUI
+			ui = new JMinesGui(); //use GUI
 		else
-			ui = new MineSweeperCli(); //use CLI
+			ui = new JMinesCli(); //use CLI
 		
 		//register reveal callback
 		ui.registerRevealCallback(new UiCallback() {

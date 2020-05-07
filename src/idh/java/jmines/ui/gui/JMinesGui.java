@@ -1,13 +1,11 @@
-package de.uk.java.minesweeper.ui;
+package idh.java.jmines.ui.gui;
 
-
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,12 +13,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import de.uk.java.minesweeper.GameState;
+import idh.java.jmines.model.GameState;
+import idh.java.jmines.ui.JMinesUi;
+import idh.java.jmines.ui.MouseClickListener;
+import idh.java.jmines.ui.UiCallback;
 
-public class MineSweeperGui extends JFrame implements MineSweeperUi, ActionListener, MouseClickListener {
+public class JMinesGui extends JFrame implements JMinesUi, ActionListener, MouseClickListener {
 	
 	private static final long serialVersionUID = 1L;
 	
+	// Callbacks
 	private UiCallback reveal;
 	private UiCallback mark;
 	private UiCallback newGame;
@@ -70,9 +72,6 @@ public class MineSweeperGui extends JFrame implements MineSweeperUi, ActionListe
 		
 		//Fenster sichtbar machen
 		setVisible(true);
-		
-		//play intro
-		MineSweeperIntro.play(); //play game intro
 	}
 	
 	
@@ -86,10 +85,10 @@ public class MineSweeperGui extends JFrame implements MineSweeperUi, ActionListe
 		
 		for (int y = 0; y < state.getDimensions(); y++) {
 			for (int x = 0; x < state.getDimensions(); x++) {
-				//den richtigen Button finden
-				JButton cell = (JButton) boardPanel.getComponent((10*y) + x);
-				//...und Beschriftung setzen!
-				cell.setText(state.getBoard()[x][y].toString());
+				// den richtigen Button finden
+				CellButton cell = (CellButton) boardPanel.getComponent((10*y) + x);
+				// Button-Zustand updaten!
+				cell.update();
 			}
 		}
 	}
@@ -99,17 +98,16 @@ public class MineSweeperGui extends JFrame implements MineSweeperUi, ActionListe
 	 * Initialisiert ein neues board panel zur Darstellung des Spielfelds
 	 */
 	private void initBoard(GameState state) {
-		//// zum Testen (vorübergehend) einer möglichen Spielfeld-Implementation
 		// neues Panel für Buttons mit GridLayout anlegen (Größe nach dimensions)
-		boardPanel = new JPanel(new GridLayout(state.getDimensions(), state.getDimensions()));
+		boardPanel = new JPanel(new GridLayout(state.getDimensions(), state.getDimensions(), 4, 4));
+		boardPanel.setBackground(new Color(220, 220, 220));
 		
 		for (int y = 0; y < state.getDimensions(); y++) {
 			for (int x = 0; x < state.getDimensions(); x++) {
-				JButton button = new JButton(); //Beschriftung
+				// CellButton-Instanz erzeugen (Anzahl angrenzender Minen übergeben)
+				CellButton button = new CellButton(state.getBoard()[x][y]);
 				button.setName("cell-" + x + "-" + y); // "Name" des Buttons (den merkt er sich)
-				//MouseListener für Reaktion auf Klick
-				button.addMouseListener(this);
-				button.setPreferredSize(new Dimension(42,42));
+				button.addMouseListener(this); //MouseListener für Reaktion auf Klick
 				//Button dem Panel hinzufügen
 				boardPanel.add(button);
 			}
@@ -118,7 +116,6 @@ public class MineSweeperGui extends JFrame implements MineSweeperUi, ActionListe
 		getContentPane().add(boardPanel); //Panel dem Fenster hinzufügen
 		pack(); //Fenstergröße anpassen
 	}
-	
 	
 	
 	@Override
@@ -177,6 +174,7 @@ public class MineSweeperGui extends JFrame implements MineSweeperUi, ActionListe
 			}
 		}
 	}
+	
 
 }
 

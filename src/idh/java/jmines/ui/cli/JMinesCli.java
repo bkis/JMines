@@ -1,15 +1,17 @@
-package de.uk.java.minesweeper.ui;
+package idh.java.jmines.ui.cli;
 
 import java.util.Scanner;
 
-import de.uk.java.minesweeper.Cell;
-import de.uk.java.minesweeper.GameState;
+import idh.java.jmines.model.Cell;
+import idh.java.jmines.model.GameState;
+import idh.java.jmines.ui.JMinesUi;
+import idh.java.jmines.ui.UiCallback;
 
 /**
  * This is an implementation of the MineSweeperUi interface.
  * It offer a command line interface to play the MineSweeper game.
  */
-public class MineSweeperCli implements MineSweeperUi {
+public class JMinesCli implements JMinesUi {
 	
 	//UI callbacks for interaction with game core
 	private UiCallback reveal;
@@ -23,7 +25,7 @@ public class MineSweeperCli implements MineSweeperUi {
 	@Override
 	public void init() {
 		input = new Scanner(System.in); //init scanner
-		MineSweeperIntro.play(); //play game intro
+		JMinesCliIntro.play(); //play game intro
 		
 		String currInput; //to store user input
 		int dim = -1; //to store chosen dimensions

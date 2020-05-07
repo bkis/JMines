@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-        <listEntry value="/MineSweeper/src/de/uk/java/minesweeper/MineSweeper.java"/>
+        <listEntry value="/JMines/src/idh/java/jmines/JMines.java"/>
     </listAttribute>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="1"/>
     </listAttribute>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
-    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="de.uk.java.minesweeper.MineSweeper"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="idh.java.jmines.JMines"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="09-MineSweeper-GUI-II"/>
-    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="MineSweeper"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="JMines"/>
 </launchConfiguration>

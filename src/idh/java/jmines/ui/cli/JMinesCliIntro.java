@@ -1,7 +1,7 @@
-package de.uk.java.minesweeper.ui;
+package idh.java.jmines.ui.cli;
 
 
-public class MineSweeperIntro {
+public class JMinesCliIntro {
 	
 	private static final String BANNER_STRING = 
 			"           ███╗   ███╗██╗███╗   ██╗███████╗\n" + 

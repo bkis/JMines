@@ -1,11 +1,11 @@
-package de.uk.java.minesweeper.ui;
+package idh.java.jmines.ui;
 
 /**
  * This interface defines the methods needed in a
  * MineSweeper user interface. The methods to register
  * all the UI callbacks is all there is. That's it.
  */
-public interface MineSweeperUi {
+public interface JMinesUi {
 	
 	/**
 	 * Registers callback for revealing a cell
