@@ -6,12 +6,14 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 import idh.java.jmines.model.GameState;
 import idh.java.jmines.ui.JMinesUi;
@@ -99,8 +101,9 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	 */
 	private void initBoard(GameState state) {
 		// neues Panel für Buttons mit GridLayout anlegen (Größe nach dimensions)
-		boardPanel = new JPanel(new GridLayout(state.getDimensions(), state.getDimensions(), 4, 4));
-		boardPanel.setBackground(new Color(220, 220, 220));
+		boardPanel = new JPanel(new GridLayout(state.getDimensions(), state.getDimensions(), 2, 2));
+		boardPanel.setBackground(new Color(200, 200, 200)); // panel background
+		boardPanel.setBorder(new EmptyBorder(2, 2, 2, 2)); // panel padding
 		
 		for (int y = 0; y < state.getDimensions(); y++) {
 			for (int x = 0; x < state.getDimensions(); x++) {

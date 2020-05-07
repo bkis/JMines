@@ -41,8 +41,8 @@ public class CellButton extends JButton {
 	
 	// Farben für Button-Hintergrund
 	private static final Color[] COLORS_BG = {
-		new Color(240, 240, 240), // unrevealed: light gray
-		new Color(220, 220, 220)  // revealed: gray
+		new Color(248, 248, 248), // unrevealed: light gray
+		new Color(230, 230, 230)  // revealed: gray
 	};
 	
 	private Cell cellModel;
