@@ -9,6 +9,12 @@ import idh.java.jmines.ui.gui.JMinesGui;
 
 public class JMines {
 	
+	public static final Integer[] OPTIONS_DIMENSIONS = 
+		{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+	
+	public static final Integer[] OPTIONS_DIFFICULTY = 
+		{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	
 	private JMinesUi ui; //a reference to the user interface
 	private GameState state; //a reference to the current game state
 	

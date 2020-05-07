@@ -154,6 +154,12 @@ public class GameState {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "JMine GameState [dim:" + dimensions + ", diff:" + difficulty + "]";
+	}
+	
+	
 }
 
 

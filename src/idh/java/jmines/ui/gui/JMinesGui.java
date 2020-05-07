@@ -8,13 +8,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import idh.java.jmines.JMines;
 import idh.java.jmines.model.GameState;
 import idh.java.jmines.ui.JMinesUi;
 import idh.java.jmines.ui.MouseClickListener;
@@ -30,6 +33,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	private UiCallback newGame;
 	
 	private JPanel boardPanel;
+	private JLabel welcomeScreen;
 	
 	
 	@Override
@@ -46,7 +50,6 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		
 		//ein paar Einstellungen zum Fenster
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //was passiert beim Schließen des Fensters?
-		setPreferredSize(new Dimension(500, 500)); //die initiale Fenstergröße
 		setTitle("MineSweeper"); //der Text für den Titel des Fensters
 		
 		//// Fenster-Menü initialisieren ////
@@ -69,6 +72,11 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		menu.add(menuItemQuitGame);
 		setJMenuBar(menuBar);
 		
+		//Titel-Grafik
+		welcomeScreen = new JLabel();
+		welcomeScreen.setIcon(AssetsHelper.getIcon("title-graphic.png"));
+		showWelcomeScreen();
+		
 		pack(); //Fenstergröße anpassen
 		setLocationRelativeTo(null); //Fenster auf Bildschrim zentrieren
 		
@@ -88,7 +96,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		for (int y = 0; y < state.getDimensions(); y++) {
 			for (int x = 0; x < state.getDimensions(); x++) {
 				// den richtigen Button finden
-				CellButton cell = (CellButton) boardPanel.getComponent((10*y) + x);
+				CellButton cell = (CellButton) boardPanel.getComponent((state.getDimensions()*y) + x);
 				// Button-Zustand updaten!
 				cell.update();
 			}
@@ -100,6 +108,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	 * Initialisiert ein neues board panel zur Darstellung des Spielfelds
 	 */
 	private void initBoard(GameState state) {
+		System.out.println("[JMines] initializing: " + state);
 		// neues Panel für Buttons mit GridLayout anlegen (Größe nach dimensions)
 		boardPanel = new JPanel(new GridLayout(state.getDimensions(), state.getDimensions(), 2, 2));
 		boardPanel.setBackground(new Color(200, 200, 200)); // panel background
@@ -109,15 +118,18 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 			for (int x = 0; x < state.getDimensions(); x++) {
 				// CellButton-Instanz erzeugen (Anzahl angrenzender Minen übergeben)
 				CellButton button = new CellButton(state.getBoard()[x][y]);
-				button.setName("cell-" + x + "-" + y); // "Name" des Buttons (den merkt er sich)
+				button.setName("cell-" + x + ":" + y); // "Name" des Buttons (den merkt er sich)
 				button.addMouseListener(this); //MouseListener für Reaktion auf Klick
 				//Button dem Panel hinzufügen
 				boardPanel.add(button);
 			}
 		}
 		
+		setPreferredSize(null); //unset preferred window size
+		getContentPane().remove(welcomeScreen); //Welcome-Screen entfernen
 		getContentPane().add(boardPanel); //Panel dem Fenster hinzufügen
 		pack(); //Fenstergröße anpassen
+		setLocationRelativeTo(null); //Fenster auf Bildschrim zentrieren
 	}
 	
 	
@@ -145,7 +157,22 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "new":
-			draw(newGame.call(10, 5));
+			// reset board panel and show welcome screen
+			showWelcomeScreen();
+			// ask for board dimensions
+		    Integer dimensions = (Integer) JOptionPane.showInputDialog(null, "Board dimensions (width = height):",
+		        "Setup New Game", JOptionPane.QUESTION_MESSAGE, null,
+		        JMines.OPTIONS_DIMENSIONS, // Array of choices
+		        JMines.OPTIONS_DIMENSIONS[5]); // Default choice
+		    if (dimensions == null) return;
+		    // ask for difficulty
+		    Integer difficulty = (Integer) JOptionPane.showInputDialog(null, "Game difficulty:",
+		        "Setup New Game", JOptionPane.QUESTION_MESSAGE, null,
+		        JMines.OPTIONS_DIFFICULTY, // Array of choices
+		        JMines.OPTIONS_DIFFICULTY[4]); // Default choice
+		    if (difficulty == null) return;
+		    // create and draw new game
+			draw(newGame.call(dimensions, difficulty));
 			break;
 		case "quit":
 			System.exit(0);
@@ -166,9 +193,9 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		boolean leftClick = e.getButton() == MouseEvent.BUTTON1;
 		
 		if (e.getComponent().getName().startsWith("cell-")) {
-			String xy = e.getComponent().getName().replaceAll("\\D", "");
-			int x = xy.charAt(0) - 48;
-			int y = xy.charAt(1) - 48;
+			String[] xy = e.getComponent().getName().replaceAll("^cell-", "").split("\\:");
+			int x = Integer.parseInt(xy[0]);
+			int y = Integer.parseInt(xy[1]);
 			
 			if (leftClick) {
 				draw(reveal.call(x, y)); // bei Linksklick aufdecken
@@ -176,6 +203,18 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 				draw(mark.call(x, y)); // in allen anderen Fällen markieren
 			}
 		}
+	}
+	
+	
+	private void showWelcomeScreen() {
+		if (boardPanel != null) {
+			getContentPane().remove(boardPanel);
+			boardPanel = null;
+		}
+		setPreferredSize(new Dimension(400, 400));
+		getContentPane().add(welcomeScreen);
+		pack();
+		setLocationRelativeTo(null); //Fenster auf Bildschrim zentrieren
 	}
 	
 
