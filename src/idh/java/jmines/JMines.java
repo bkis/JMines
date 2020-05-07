@@ -84,16 +84,19 @@ public class JMines {
 			}
 		}
 		
-		state.setWon(isWon());
+		state.setWon(checkIfWon());
 		return state;
 	}
 	
 	
-	private boolean isWon() {
-		//is won?
-		for (int y1 = 0; y1 < state.getBoard().length; y1++) {
-			for (int x1 = 0; x1 < state.getBoard()[y1].length; x1++) {
-				if (!state.getBoard()[x1][y1].isRevealed() && !state.getBoard()[x1][y1].isMine()) {
+	/*
+	 * Is the game won?
+	 */
+	private boolean checkIfWon() {
+		if (state.isLost()) return false;
+		for (int y = 0; y < state.getBoard().length; y++) {
+			for (int x = 0; x < state.getBoard()[y].length; x++) {
+				if (!state.getBoard()[x][y].isRevealed() && !state.getBoard()[x][y].isMine()) {
 					return false;
 				} 
 			}

@@ -14,6 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
@@ -75,6 +76,8 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		//Titel-Grafik
 		welcomeScreen = new JLabel();
 		welcomeScreen.setIcon(AssetsHelper.getIcon("title-graphic.png"));
+		welcomeScreen.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeScreen.setVerticalAlignment(SwingConstants.CENTER);
 		showWelcomeScreen();
 		
 		pack(); //Fenstergröße anpassen
@@ -98,7 +101,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 				// den richtigen Button finden
 				CellButton cell = (CellButton) boardPanel.getComponent((state.getDimensions()*y) + x);
 				// Button-Zustand updaten!
-				cell.update();
+				cell.updateState(state.isWon());
 			}
 		}
 	}

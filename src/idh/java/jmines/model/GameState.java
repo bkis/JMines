@@ -156,7 +156,7 @@ public class GameState {
 	
 	@Override
 	public String toString() {
-		return "JMine GameState [dim:" + dimensions + ", diff:" + difficulty + "]";
+		return "JMine GameState [dim:" + dimensions + ", diff:" + difficulty + ", won:" + won + "]";
 	}
 	
 	

@@ -16,6 +16,7 @@ public class CellButton extends JButton {
 	// ImageIcons für Icon-Grafiken
 	private static final ImageIcon ICON_MARKED = AssetsHelper.getIcon("icon-marked.png");
 	private static final ImageIcon ICON_EXPLOSION = AssetsHelper.getIcon("icon-explosion.png");
+	private static final ImageIcon ICON_WON = AssetsHelper.getIcon("icon-won.png");
 	
 	// Schriftart für alle Zellen-Button
 	private static final Font CELL_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 18);
@@ -55,7 +56,7 @@ public class CellButton extends JButton {
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 	
-	public void update() {
+	public void updateState(boolean gameIsWon) {
 		if (cellModel.isRevealed()) {
 			setBackground(COLORS_BG[1]);
 		}
@@ -68,7 +69,7 @@ public class CellButton extends JButton {
 			setIcon(null);
 		} else if (cellModel.isMine()) {
 			setText("");
-			setIcon(ICON_EXPLOSION);
+			setIcon(gameIsWon ? ICON_WON : ICON_EXPLOSION);
 		} else {
 			if (cellModel.getNumber() == 0) {
 				setText("");
