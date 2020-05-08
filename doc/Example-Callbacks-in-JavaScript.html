@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JS callbacks demo for reference</title>
+	</head>
+	<body>
+
+		<h1 id="heading">This won't be read, anyway!</h1>
+
+		<script type="text/javascript">
+
+			// JavaScript has function references,
+			// so callbacks are very natural here...
+
+			var stuffToDoAfterwards = function(x, y){
+				// delay for 1 second
+				setTimeout(function(){
+					document.getElementById("heading").innerHTML = "But now it's just " + x + ", " + y + "!!!";
+				}, 1000);
+			}
+
+			var stuffToDoNow = function(callback){
+				// delay for 1 second
+				setTimeout(function(){
+					document.getElementById("heading").innerHTML = "Stuff was done.";
+					callback("WOW", "YEAH!");
+				}, 1000);
+			}
+
+			//call function and pass callback function
+			stuffToDoNow(stuffToDoAfterwards);
+		</script>
+
+	</body>
+</html>
