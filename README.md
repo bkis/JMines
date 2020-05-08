@@ -4,10 +4,13 @@
 
 
 ## Really? Minesweeper?
-Yes. Really. It's for learning/teaching purposes.
+Yes. Really. It's for learning/teaching purposes. And it's a fun game.
 
+| GUI | CLI |
+| --- | --- |
+| ![GUI](extras/screenshot-GUI.png) | ![CLI](extras/screenshot-CLI.png) |
 
-## What's to learn here?
+## What's to be learned here?
 
 The idea is to have a well-documented, readable, Open Source implementation of a fun game nearly everyone knows. It's intended to be used for teaching Java and [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) in a class at the University of Cologne, but everyone's welcome to use it as a learning resource.
 
