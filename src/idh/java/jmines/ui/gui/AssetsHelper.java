@@ -1,11 +1,11 @@
 package idh.java.jmines.ui.gui;
 
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import idh.java.jmines.JMines;
+
 
 public class AssetsHelper {
 	
