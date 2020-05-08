@@ -21,7 +21,6 @@ import javax.swing.border.EmptyBorder;
 import idh.java.jmines.JMines;
 import idh.java.jmines.model.GameState;
 import idh.java.jmines.ui.JMinesUi;
-import idh.java.jmines.ui.MouseClickListener;
 import idh.java.jmines.ui.UiCallback;
 
 public class JMinesGui extends JFrame implements JMinesUi, ActionListener, MouseClickListener {

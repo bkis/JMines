@@ -1,4 +1,4 @@
-package idh.java.jmines.ui;
+package idh.java.jmines.ui.gui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
