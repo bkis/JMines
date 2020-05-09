@@ -15,7 +15,6 @@ public class JMines {
 	public static final Integer[] OPTIONS_DIFFICULTY = 
 		{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	
-	private JMinesUi ui; //a reference to the user interface
 	private GameState state; //a reference to the current game state
 	
 	
@@ -31,6 +30,9 @@ public class JMines {
 	 * This constructor initializes the MineSweeper game
 	 */
 	public JMines(boolean gui) {
+		JMinesUi ui; // a reference to the user interface
+		             // (only needed for setting it up and
+		             // registering the callbacks!)
 		//initialize the user interface (GUI or CLI!)
 		if (gui)
 			ui = new JMinesGui(); //use GUI
