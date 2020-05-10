@@ -72,6 +72,29 @@ public class JMines {
 	private GameState reveal(int x, int y) {
 		Cell[][] board = state.getBoard();
 		
+		// reveal
+		reveal(x, y, board);
+		
+		// check if game is won
+		if (!state.isLost()) {
+			boolean won = true;
+			for (int y1 = 0; y1 < board.length; y1++) {
+				for (int x1 = 0; x1 < board[y1].length; x1++) {
+					if (!board[x1][y1].isRevealed() && !board[x1][y1].isMine()) {
+						won = false;
+						break;
+					} 
+				}
+			}
+			state.setWon(won);
+		}
+		
+		return state;
+	}
+	
+	
+	// the recursive part of the reveal logic
+	private void reveal(int x, int y, Cell[][] board) {
 		if (!board[x][y].isRevealed()) {
 			board[x][y].setRevealed(true);
 			if (board[x][y].isMine()) {
@@ -85,25 +108,6 @@ public class JMines {
 				}
 			}
 		}
-		
-		state.setWon(checkIfWon());
-		return state;
-	}
-	
-	
-	/*
-	 * Is the game won?
-	 */
-	private boolean checkIfWon() {
-		if (state.isLost()) return false;
-		for (int y = 0; y < state.getBoard().length; y++) {
-			for (int x = 0; x < state.getBoard()[y].length; x++) {
-				if (!state.getBoard()[x][y].isRevealed() && !state.getBoard()[x][y].isMine()) {
-					return false;
-				} 
-			}
-		}
-		return true;
 	}
 	
 	
