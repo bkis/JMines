@@ -50,7 +50,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		
 		//ein paar Einstellungen zum Fenster
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //was passiert beim Schließen des Fensters?
-		setTitle("MineSweeper"); //der Text für den Titel des Fensters
+		setTitle("JMines"); //der Text für den Titel des Fensters
 		
 		//// Fenster-Menü initialisieren ////
 		JMenuBar menuBar = new JMenuBar();
