@@ -20,9 +20,9 @@ All this is still :construction: **work in progress!** :construction:
 2. The game implements the [**MVC pattern**](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (Model-View-Controller), as it clearly separates _Model_ (the classes `GameState` and `Cell`), _View_ (the user interfaces `JMinesCli` and `JMinesGui`) and _Controller_ (the class `JMines`) logic.
 3. The user interfaces (views) and the core game logic class `JMines` (controller) don't need to "know each other". The whole communication is implemented using [**callback interfaces**](https://www.javaworld.com/article/2077462/java-tip-10--implement-callback-routines-in-java.html) (straight from 1996!), effectively achieving [**inversion of control**](https://en.wikipedia.org/wiki/Inversion_of_control).
 4. In all of the above, there's a lot of [**object oriented programming**](https://en.wikipedia.org/wiki/Object-oriented_programming).
-5. Playing the game itself will teach you 
+5. Playing the game itself will teach you logical thinking.
 
 
 ## Third party attribution
 
-The game is currently using a handful of icons form [icons8.com](https://icons8.com), so thanks for those icons! :open_hands:
+The game is currently using a handful of icons form [icons8](https://icons8.com), so thanks for those icons! :open_hands:
