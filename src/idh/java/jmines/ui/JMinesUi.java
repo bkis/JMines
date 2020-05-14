@@ -8,22 +8,10 @@ package idh.java.jmines.ui;
 public interface JMinesUi {
 	
 	/**
-	 * Registers callback for revealing a cell
+	 * Registers UiCallback instance for UI-core-communication
 	 * @param callback
 	 */
-	public void registerRevealCallback(UiCallback callback);
-	
-	/**
-	 * Registers callback for marking a cell
-	 * @param callback
-	 */
-	public void registerMarkCallback(UiCallback callback);
-	
-	/**
-	 * Registers callback for starting a new game
-	 * @param callback
-	 */
-	public void registerNewGameCallback(UiCallback callback);
+	public void registerUiCallback(UiCallback callback);
 	
 	/**
 	 * Initializes the UI

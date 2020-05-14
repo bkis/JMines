@@ -27,10 +27,8 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	
 	private static final long serialVersionUID = 1L;
 	
-	// Callbacks
-	private UiCallback reveal;
-	private UiCallback mark;
-	private UiCallback newGame;
+	//UI callbacks for interaction with game core
+	private UiCallback gameCore;
 	
 	private JPanel boardPanel;
 	private JLabel welcomeScreen;
@@ -136,18 +134,8 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	
 	
 	@Override
-	public void registerRevealCallback(UiCallback callback) {
-		reveal = callback;
-	}
-
-	@Override
-	public void registerMarkCallback(UiCallback callback) {
-		mark = callback;
-	}
-
-	@Override
-	public void registerNewGameCallback(UiCallback callback) {
-		newGame = callback;
+	public void registerUiCallback(UiCallback callback) {
+		this.gameCore = callback;
 	}
 
 
@@ -174,7 +162,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		        JMines.OPTIONS_DIFFICULTY[4]); // Default choice
 		    if (difficulty == null) return;
 		    // create and draw new game
-			draw(newGame.call(dimensions, difficulty));
+			draw(gameCore.callNewGame(dimensions, difficulty));
 			break;
 		case "quit":
 			System.exit(0);
@@ -200,9 +188,9 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 			int y = Integer.parseInt(xy[1]);
 			
 			if (leftClick) {
-				draw(reveal.call(x, y)); // bei Linksklick aufdecken
+				draw(gameCore.callReveal(x, y)); // bei Linksklick aufdecken
 			} else {
-				draw(mark.call(x, y)); // in allen anderen Fällen markieren
+				draw(gameCore.callMark(x, y)); // in allen anderen Fällen markieren
 			}
 		}
 	}

@@ -10,11 +10,29 @@ public interface UiCallback {
 	
 	/**
 	 * This is a callback method from the UI to the game core.
-	 * It receives two ints and returns the current GameState.
-	 * @param i1 first int value
-	 * @param i2 second int value
+	 * It triggers revealing a mine field / cell.
+	 * @param x x-coordinate of the field
+	 * @param y y-coordinate of the field
 	 * @return The current game state as GameState object
 	 */
-	public GameState call(int i1, int i2);
+	public GameState callReveal(int x, int y);
+	
+	/**
+	 * This is a callback method from the UI to the game core.
+	 * It triggers marking a mine field / cell.
+	 * @param x x-coordinate of the field
+	 * @param y y-coordinate of the field
+	 * @return The current game state as GameState object
+	 */
+	public GameState callMark(int x, int y);
+	
+	/**
+	 * This is a callback method from the UI to the game core.
+	 * It triggers revealing a mine field / cell.
+	 * @param x x-coordinate of the field
+	 * @param y y-coordinate of the field
+	 * @return The current game state as GameState object
+	 */
+	public GameState callNewGame(int dimensions, int difficulty);
 
 }

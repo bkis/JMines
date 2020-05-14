@@ -14,9 +14,7 @@ import idh.java.jmines.ui.UiCallback;
 public class JMinesCli implements JMinesUi {
 	
 	//UI callbacks for interaction with game core
-	private UiCallback reveal;
-	private UiCallback mark;
-	private UiCallback newGame;
+	private UiCallback gameCore;
 	
 	//the Scanner instance used to get user input
 	private Scanner input;
@@ -50,7 +48,7 @@ public class JMinesCli implements JMinesUi {
 		} while (diff == -1);
 		
 		//start new game, draw game state!
-		draw(newGame.call(dim, diff));
+		draw(gameCore.callNewGame(dim, diff));
 		
 		//ask for command
 		do {
@@ -62,9 +60,9 @@ public class JMinesCli implements JMinesUi {
 			int x = Integer.parseInt(cmdsplit[1] + "");
 			int y = Integer.parseInt(cmdsplit[2] + "");
 			if (c == 'r') {
-				draw(reveal.call(x, y));
+				draw(gameCore.callReveal(x, y));
 			} else {
-				draw(mark.call(x, y));
+				draw(gameCore.callMark(x, y));
 			}
 		} while (true);
 	}
@@ -130,18 +128,8 @@ public class JMinesCli implements JMinesUi {
 	}
 	
 	@Override
-	public void registerRevealCallback(UiCallback callback) {
-		reveal = callback; //reference to callback as a field
-	}
-
-	@Override
-	public void registerMarkCallback(UiCallback callback) {
-		mark = callback; //reference to callback as a field
-	}
-
-	@Override
-	public void registerNewGameCallback(UiCallback callback) {
-		newGame = callback; //reference to callback as a field
+	public void registerUiCallback(UiCallback callback) {
+		this.gameCore = callback; //reference to callback as a field
 	}
 
 }

@@ -40,26 +40,20 @@ public class JMines {
 			ui = new JMinesCli(); //use CLI
 		
 		//register reveal callback
-		ui.registerRevealCallback(new UiCallback() {
+		ui.registerUiCallback(new UiCallback() {
 			@Override
-			public GameState call(int x, int y) {
+			public GameState callReveal(int x, int y) {
 				return reveal(x, y); //actual method call here
 			}
-		});
-		
-		//register mark callback
-		ui.registerMarkCallback(new UiCallback() {
+			
 			@Override
-			public GameState call(int x, int y) {
+			public GameState callMark(int x, int y) {
 				return mark(x, y); //actual method call here
 			}
-		});
-		
-		//register new game callback
-		ui.registerNewGameCallback(new UiCallback() {
+			
 			@Override
-			public GameState call(int x, int y) {
-				return newGame(x, y); //actual method call here
+			public GameState callNewGame(int dimensions, int difficulty) {
+				return newGame(dimensions, difficulty); //actual method call here
 			}
 		});
 		
