@@ -80,7 +80,8 @@ public class JMines {
 					} 
 				}
 			}
-			state.setWon(won);
+			if (won) revealAll(); // reveal all cells if game is won
+			state.setWon(won); // game is won???
 		}
 		
 		return state;
@@ -92,7 +93,8 @@ public class JMines {
 		if (!board[x][y].isRevealed()) {
 			board[x][y].setRevealed(true);
 			if (board[x][y].isMine()) {
-				state.setLost();
+				revealAll();  // reveal all cells
+				state.setLost(); // game is lost!
 			} else if (board[x][y].getNumber() == 0) {
 				//reveal all neighbors
 				for (int y1 = Math.max(y-1, 0); y1 <= Math.min(y+1, board.length-1); y1++) {
@@ -104,7 +106,6 @@ public class JMines {
 		}
 	}
 	
-	
 	//mark a cell!
 	private GameState mark(int x, int y) {
 		state.getBoard()[x][y].setMarked(!state.getBoard()[x][y].isMarked());
@@ -113,8 +114,61 @@ public class JMines {
 	
 	//start a new game!
 	private GameState newGame(int dimensions, int difficulty) {
-		state = new GameState(dimensions, difficulty);
+		// initialize board object
+		Cell[][] board = new Cell[dimensions][dimensions];
+		// calculate number of mines to deploy (this is not ideal!)
+		int mines = dimensions * difficulty / (10 / 3);
+		// variable to count mines that are left to "deploy"
+		int minesLeft = mines;
+		// calculate number of cells on board
+		int cells = (int) Math.pow(dimensions, 2);
+		
+		//create board and place mines!
+		for (int y = 0; y < board.length; y++) {
+			for (int x = 0; x < board[y].length; x++) {
+				board[x][y] = new Cell(x, y); //init cell
+				//place mine?
+				if (minesLeft > 0 && ((double)minesLeft / (double)cells) > Math.random()) {
+					board[x][y].setMine(true);
+					minesLeft--;
+				}
+				//board[x][y].setRevealed(true); //TEMP
+				cells--;
+			}
+		}
+		
+		//setup number of neighboring mines for each cell!
+		//iterate over cells
+		for (int y = 0; y < board.length; y++) {
+			for (int x = 0; x < board[y].length; x++) {
+				//if cell is not a mine, continue with next cell
+				if (!board[x][y].isMine()) continue;
+				
+				//iterate over neighboring cells
+				for (int y1 = Math.max(y-1, 0); y1 <= Math.min(y+1, board.length-1); y1++) {
+					for (int x1 = Math.max(x-1, 0); x1 <= Math.min(x+1, board[y].length-1); x1++) {
+						//if not a mine, increase number of cell by 1
+						if (!board[x1][y1].isMine()) {
+							board[x1][y1].setNumber(board[x1][y1].getNumber() + 1);
+						}
+					}
+				}
+				
+			}
+		}
+		
+		// create new GameState and assign it to class attribute
+		state = new GameState(board, difficulty, mines);
+		// return new game state
 		return state;
+	}
+	
+	private void revealAll() {
+		for (int i = 0; i < state.getBoard().length; i++) {
+			for (int j = 0; j < state.getBoard()[i].length; j++) {
+				state.getBoard()[i][j].setRevealed(true);
+			}
+		}
 	}
 
 }
