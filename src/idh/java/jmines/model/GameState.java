@@ -25,8 +25,9 @@ public class GameState {
 	}
 	
 	
-	//// SOME FUNCTIONALITY DRAFTS ////
-	
+	/*
+	 * Initialize the game board!
+	 */
 	private void initBoard() {
 		board = new Cell[dimensions][dimensions]; //initialize board object
 		mines = calcMineCount(dimensions, difficulty); //calculate number of mines to deploy
