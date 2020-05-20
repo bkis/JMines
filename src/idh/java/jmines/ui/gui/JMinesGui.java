@@ -23,7 +23,7 @@ import idh.java.jmines.model.GameState;
 import idh.java.jmines.ui.JMinesUi;
 import idh.java.jmines.ui.UiCallback;
 
-public class JMinesGui extends JFrame implements JMinesUi, ActionListener, MouseClickListener {
+public class JMinesGui extends JFrame implements JMinesUi, ActionListener, MouseReleaseListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -178,7 +178,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	 * registriert haben (hier: die Cell-Buttons des Spielfelds).
 	 */
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseReleased(MouseEvent e) {
 		//handelt es sich um einen Linksklick?
 		boolean leftClick = e.getButton() == MouseEvent.BUTTON1;
 		
