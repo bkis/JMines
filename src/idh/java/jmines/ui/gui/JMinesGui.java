@@ -23,7 +23,7 @@ import idh.java.jmines.model.GameState;
 import idh.java.jmines.ui.JMinesUi;
 import idh.java.jmines.ui.UiCallback;
 
-public class JMinesGui extends JFrame implements JMinesUi, ActionListener, MouseClickListener {
+public class JMinesGui extends JFrame implements JMinesUi, ActionListener, RightClickListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -119,7 +119,9 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 				// CellButton-Instanz erzeugen (Anzahl angrenzender Minen übergeben)
 				CellButton button = new CellButton(state.getBoard()[x][y]);
 				button.setName("cell-" + x + ":" + y); // "Name" des Buttons (den merkt er sich)
-				button.addMouseListener(this); //MouseListener für Reaktion auf Klick
+				button.addMouseListener(this); //MouseListener für Reaktion auf Rechtsklick
+				button.addActionListener(this); //ActionListener für Reaktion auf Button-Aktin (Links-Klick)
+				button.setActionCommand("reveal"); //Action-Command für Button-Aktion (Links-Klick)
 				//Button dem Panel hinzufügen
 				boardPanel.add(button);
 			}
@@ -167,6 +169,14 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 		case "quit":
 			System.exit(0);
 			break;
+		case "reveal":
+			if (e.getSource() instanceof CellButton) {
+				CellButton cell = ((CellButton)e.getSource());
+				String[] xy = cell.getName().replaceAll("^cell-", "").split("\\:");
+				int x = Integer.parseInt(xy[0]);
+				int y = Integer.parseInt(xy[1]);
+				draw(gameCore.callReveal(x, y)); // bei Linksklick aufdecken
+			}
 		default:
 			break;
 		}
@@ -178,20 +188,13 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Mouse
 	 * registriert haben (hier: die Cell-Buttons des Spielfelds).
 	 */
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		//handelt es sich um einen Linksklick?
-		boolean leftClick = e.getButton() == MouseEvent.BUTTON1;
-		
-		if (e.getComponent().getName().startsWith("cell-")) {
+	public void mousePressed(MouseEvent e) {
+		if (e.getButton() != MouseEvent.BUTTON1
+				&& e.getComponent().getName().startsWith("cell-")) {
 			String[] xy = e.getComponent().getName().replaceAll("^cell-", "").split("\\:");
 			int x = Integer.parseInt(xy[0]);
 			int y = Integer.parseInt(xy[1]);
-			
-			if (leftClick) {
-				draw(gameCore.callReveal(x, y)); // bei Linksklick aufdecken
-			} else {
-				draw(gameCore.callMark(x, y)); // in allen anderen Fällen markieren
-			}
+			draw(gameCore.callMark(x, y)); // mark cell
 		}
 	}
 	
