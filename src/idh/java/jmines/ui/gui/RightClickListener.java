@@ -8,29 +8,21 @@ import java.awt.event.MouseListener;
  * herkömmlichen MouseListener zu vereinfachen (wir brauchen nämlich
  * nur eine der fünf Methoden).
  */
-public interface MouseReleaseListener extends MouseListener {
+public interface RightClickListener extends MouseListener {
 
 	@Override
-	default void mouseClicked(MouseEvent e) {
-		// leer
-	}
+	default void mouseClicked(MouseEvent e) {}
 	
 	@Override
-	default void mouseEntered(MouseEvent e) {
-		// leer
-	}
+	default void mouseEntered(MouseEvent e) {}
 	
 	@Override
-	default void mouseExited(MouseEvent e) {
-		// leer
-	}
+	default void mouseExited(MouseEvent e) {}
 	
 	@Override
-	default void mousePressed(MouseEvent e) {
-		// leer
-	}
+	public void mousePressed(MouseEvent e);
 	
 	@Override
-	public void mouseReleased(MouseEvent e);
+	default void mouseReleased(MouseEvent e) {}
 
 }
