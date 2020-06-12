@@ -72,7 +72,7 @@ public class JMinesGui extends JFrame implements JMinesUi, ActionListener, Right
 		
 		//Titel-Grafik
 		welcomeScreen = new JLabel();
-		welcomeScreen.setIcon(AssetsHelper.getIcon("title-graphic.png"));
+		welcomeScreen.setIcon(IconAsset.getIcon("title-graphic.png"));
 		welcomeScreen.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeScreen.setVerticalAlignment(SwingConstants.CENTER);
 		showWelcomeScreen();

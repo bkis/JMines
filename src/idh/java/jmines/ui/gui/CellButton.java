@@ -14,9 +14,9 @@ public class CellButton extends JButton {
 	private static final long serialVersionUID = 1L;
 	
 	// ImageIcons für Icon-Grafiken
-	private static final ImageIcon ICON_MARKED = AssetsHelper.getIcon("icon-marked.png");
-	private static final ImageIcon ICON_EXPLOSION = AssetsHelper.getIcon("icon-explosion.png");
-	private static final ImageIcon ICON_WON = AssetsHelper.getIcon("icon-won.png");
+	private static final ImageIcon ICON_MARKED = IconAsset.getIcon("icon-marked.png");
+	private static final ImageIcon ICON_EXPLOSION = IconAsset.getIcon("icon-explosion.png");
+	private static final ImageIcon ICON_WON = IconAsset.getIcon("icon-won.png");
 	
 	// Schriftart für alle Zellen-Button
 	private static final Font CELL_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 18);

@@ -7,15 +7,16 @@ import javax.swing.ImageIcon;
 import idh.java.jmines.JMines;
 
 
-public class AssetsHelper {
+public class IconAsset {
 	
 	// Pfad zu GUI assets (icons)
 	private static final String ASSETS_PATH = "/idh/java/jmines/ui/gui/assets/";
 	
 	
-	public static ImageIcon getIcon(String assetName) {
+	public static ImageIcon getIcon(String iconFileName) {
 		try {
-			return new ImageIcon(ImageIO.read(JMines.class.getResource(ASSETS_PATH + assetName)));
+			return new ImageIcon(ImageIO.read(
+					JMines.class.getResource(ASSETS_PATH + iconFileName)));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
