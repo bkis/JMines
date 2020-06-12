@@ -54,6 +54,7 @@ public class JMinesCli implements JMinesUi {
 		do {
 			System.out.print("\n[r]eveal or [m]ark: ");
 			String cmd = input.nextLine().replaceAll("\\s", "").toLowerCase();
+			if (cmd.equalsIgnoreCase("exit")) break;
 			if (!isValidCmd(cmd)) continue;
 			char[] cmdsplit = cmd.toCharArray();
 			char c = cmdsplit[0];
@@ -65,6 +66,8 @@ public class JMinesCli implements JMinesUi {
 				draw(gameCore.callMark(x, y));
 			}
 		} while (true);
+		
+		input.close();
 	}
 	
 	
